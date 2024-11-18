@@ -1,0 +1,44 @@
+import { IInpageProviderConfig } from '@chargerwallet/cross-inpage-provider-core';
+import { AlephiumWindowObject, EnableOptions, RequestMessage } from '@alephium/get-extension-wallet';
+import { EnableOptionsBase, Account, NodeProvider, ExplorerProvider, SignDeployContractTxParams, SignDeployContractTxResult, SignExecuteScriptTxParams, SignExecuteScriptTxResult, SignTransferTxParams, SignTransferTxResult, SignUnsignedTxParams, SignUnsignedTxResult, SignMessageParams, SignMessageResult, InteractiveSignerProvider } from '@alephium/web3';
+import { ProviderAlphBase } from './ProviderAlphBase';
+type ChargerWalletTonProviderProps = IInpageProviderConfig & {
+    timeout?: number;
+};
+export declare class ProviderAlph extends InteractiveSignerProvider implements AlephiumWindowObject {
+    #private;
+    id: string;
+    name: string;
+    icon: string;
+    version: string;
+    _accountInfo: Account | undefined;
+    _base: ProviderAlphBase;
+    onDisconnected: (() => void | Promise<void>) | undefined;
+    constructor(props: ChargerWalletTonProviderProps);
+    private bridgeRequest;
+    on(eventName: string | symbol, listener: (...args: unknown[]) => void): void;
+    off(eventName: string | symbol, listener: (...args: unknown[]) => void): void;
+    emit(eventName: string, ...args: unknown[]): boolean;
+    private _registerEvents;
+    private _handleConnected;
+    private _handleDisconnected;
+    private _isAccountsChanged;
+    private _handleAccountChange;
+    disconnect(): Promise<void>;
+    isPreauthorized(options: EnableOptions): Promise<boolean>;
+    enableIfConnected(options: EnableOptions): Promise<Account | undefined>;
+    get connectedAccount(): Account | undefined;
+    get connectedNetworkId(): "mainnet" | "testnet" | "devnet" | undefined;
+    unsafeEnable(opt?: EnableOptionsBase | undefined): Promise<Account>;
+    get nodeProvider(): NodeProvider | undefined;
+    get explorerProvider(): ExplorerProvider | undefined;
+    unsafeGetSelectedAccount(): Promise<Account>;
+    signAndSubmitDeployContractTx(params: SignDeployContractTxParams): Promise<SignDeployContractTxResult>;
+    signAndSubmitExecuteScriptTx(params: SignExecuteScriptTxParams): Promise<SignExecuteScriptTxResult>;
+    signAndSubmitTransferTx(params: SignTransferTxParams): Promise<SignTransferTxResult>;
+    signAndSubmitUnsignedTx(params: SignUnsignedTxParams): Promise<SignUnsignedTxResult>;
+    signUnsignedTx(params: SignUnsignedTxParams): Promise<SignUnsignedTxResult>;
+    signMessage(params: SignMessageParams): Promise<SignMessageResult>;
+    request(message: RequestMessage): Promise<boolean>;
+}
+export {};

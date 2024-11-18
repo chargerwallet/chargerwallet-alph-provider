@@ -1,1 +1,1 @@
-# chargerwallet-alph-provider
+# cross-inpage-provider
